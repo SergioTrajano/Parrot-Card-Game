@@ -1,0 +1,88 @@
+* {
+    box-sizing: border-box;
+}
+
+body {
+    font-family: 'Roboto', sans-serif;
+    background-color: #EEF9BF;
+}
+
+.container {
+    width: 872px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin: auto;
+    background-color: #EEF9BF;
+}
+
+.topo {
+    font-size: 56px;
+    font-weight: bold;
+    line-height: 66px;
+    padding: 0 auto;
+    background-color: aqua;
+    margin: 40px;
+    text-align: center;
+    background-color: #EEF9BF;
+    color: #75B79E;
+}
+
+.jogo {
+    width: 872px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    background-color: #EEF9BF;
+}
+
+.carta {
+    width: 117px;
+    height: 146px;
+    background-color: #A7E9AF;
+    border: 1px solid #99CEA8;
+    border-radius: 5px;
+}
+
+.fileira-grande {
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+    margin-top: 34px;
+}
+
+.fileira-pequena {
+    width: 268px;
+    display: flex;
+    justify-content: space-between;
+    margin-top: 34px;
+}
+
+@media (max-width: 414px) {
+    .container {
+        width: 100%;
+    }
+    
+    .topo {
+        width: 100%;
+    }
+    
+    .jogo {
+        width: 117px;
+    }
+    
+    .carta {
+        margin-bottom: 34px;
+    }
+
+    .fileira-grande {
+        flex-direction: column;
+        margin-top: 0;
+    }
+
+    .fileira-pequena {
+        flex-direction: column;
+        align-items: center;
+        margin-top: 0;
+    }
+}
