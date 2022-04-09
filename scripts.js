@@ -1,12 +1,15 @@
 let cartas = [
-    {gif: "gifs/bobrossparrot.gif", tipo: "um"},
-    {gif: "gifs/explodyparrot.gif", tipo: "dois"},
-    {gif: "gifs/fiestaparrot.gif", tipo: "tres"},
-    {gif: "gifs/metalparrot.gif", tipo: "quatro"},
-    {gif: "gifs/revertitparrot.gif", tipo: "cinco"},
-    {gif: "gifs/tripletsparrot.gif", tipo: "seis"},
-    {gif: "gifs/unicornparrot.gif", tipo: "sete"},
+    {gif: "gifs/bobrossparrot.gif"},
+    {gif: "gifs/explodyparrot.gif"},
+    {gif: "gifs/fiestaparrot.gif"},
+    {gif: "gifs/metalparrot.gif"},
+    {gif: "gifs/revertitparrot.gif"},
+    {gif: "gifs/tripletsparrot.gif"},
+    {gif: "gifs/unicornparrot.gif"},
 ]
+
+let k = 0;
+let quantClick = 0;
 
 function selecionaQuantidade() {
     let quantidade;
@@ -25,7 +28,6 @@ function continuarJogando() {
 }
 
 function iniciarJogo() {
-    const quantidade = selecionaQuantidade();
     let list = [];
     for (let j = 0; j < quantidade/2; j++) {
         list[2*j] = cartas[j];
@@ -44,6 +46,7 @@ function iniciarJogo() {
 }
 
 function virarCarta (elemento) {
+    quantClick++;
     elemento.querySelector("div:first-child").classList.add("selecionadoFrente");
     elemento.classList.add("clickado");
     elemento.querySelector("div:last-child").classList.add("selecionadoAtras");
@@ -51,6 +54,9 @@ function virarCarta (elemento) {
     if (cartasSelecionadas.length == 2) {
         if (cartasSelecionadas[0].innerHTML == cartasSelecionadas[1].innerHTML) {
             confirmaPar(cartasSelecionadas);
+            atualizaCartas();
+            k++;
+            setTimeout(fim, 1000, k);
         }
         else {
             setTimeout(desviraPar, 1000, cartasSelecionadas);
@@ -61,7 +67,7 @@ function virarCarta (elemento) {
 function confirmaPar(cartasSelecionadas) {
     for (let i = 0; i < cartasSelecionadas.length; i++) {
         cartasSelecionadas[i].classList.remove("clickado");
-        atualizaCartas();
+        cartasSelecionadas[i].classList.add("virado")
     }
 }
 
@@ -75,23 +81,16 @@ function desviraPar(cartasSelecionadas) {
 
 function atualizaCartas() {
     const lista = document.querySelectorAll("li");
-    const cartinhas = document.querySelector("ul");
-    cartinhas.innerHTML = "";
     for (let i = 0; i < lista.length; i++) {
-        if (cartinhas[i].classList.contains("virado")) {
-            cartinhas.innerHTML += `
-                <li">
-                    <div class="frente"> <img src="front.png"></div>
-                    <div class="atras"> <img src="${list[i].gif}"></div>
-                </li>`;
+        if (lista[i].classList.contains("virado")) {
+            remover = lista[i].removeAttribute("onclick");
         }
-        else {
-            cartinhas.innerHTML += `
-                <li onclick="virarCarta(this)">
-                    <div class="frente"> <img src="front.png"></div>
-                    <div class="atras"> <img src="${list[i].gif}"></div>
-                </li>`;
-        }
+    }
+}
+
+function fim(k) {
+    if (k == quantidade/2) {
+        alert(`Você ganhou em ${quantClick} jogadas!`);
     }
 }
 
@@ -99,4 +98,5 @@ function comparador() {
 	return Math.random() - 0.5;
 }
 
+const quantidade = selecionaQuantidade();
 iniciarJogo();
