@@ -8,7 +8,6 @@ let cartas = [
     {gif: "gifs/unicornparrot.gif"},
 ]
 
-let k = 0;
 let quantClick = 0;
 
 function selecionaQuantidade() {
@@ -27,7 +26,7 @@ function continuarJogando() {
     return continuar;
 }
 
-function iniciarJogo() {
+function iniciarJogo(quantidade) {
     let list = [];
     for (let j = 0; j < quantidade/2; j++) {
         list[2*j] = cartas[j];
@@ -46,17 +45,20 @@ function iniciarJogo() {
 }
 
 function virarCarta (elemento) {
-    quantClick++;
-    elemento.querySelector("div:first-child").classList.add("selecionadoFrente");
-    elemento.classList.add("clickado");
-    elemento.querySelector("div:last-child").classList.add("selecionadoAtras");
+    const quantidade = document.querySelectorAll("li").length;
     let cartasSelecionadas = document.querySelectorAll(".clickado");
+    if (cartasSelecionadas.length < 2 && cartasSelecionadas[0] !== elemento) {
+        quantClick++;
+        elemento.classList.add("clickado");
+        elemento.querySelector("div:first-child").classList.add("selecionadoFrente");
+        elemento.querySelector("div:last-child").classList.add("selecionadoAtras");
+        cartasSelecionadas = document.querySelectorAll(".clickado");
+    }
     if (cartasSelecionadas.length == 2) {
         if (cartasSelecionadas[0].innerHTML == cartasSelecionadas[1].innerHTML) {
             confirmaPar(cartasSelecionadas);
-            atualizaCartas();
-            k++;
-            setTimeout(fim, 1000, k);
+            let numVirados = atualizaCartas();
+            setTimeout(fim, 1000, numVirados, quantidade);
         }
         else {
             setTimeout(desviraPar, 1000, cartasSelecionadas);
@@ -86,11 +88,21 @@ function atualizaCartas() {
             remover = lista[i].removeAttribute("onclick");
         }
     }
+    const cartasViradas = document.querySelectorAll(".virado");
+    return cartasViradas.length;
 }
 
-function fim(k) {
-    if (k == quantidade/2) {
+function fim(numVirados, quantidade) {
+    if (numVirados == quantidade) {
         alert(`Você ganhou em ${quantClick} jogadas!`);
+        let continuar = prompt("Deseja continuar? (sim/não)");
+        while (continuar !== "sim" && continuar !== "não") {
+            continuar = prompt("Resposta invalida... Deseja continuar? (sim/não) ");
+        }
+        if (continuar === "sim") {
+            quantClick = 0;
+            inicio();
+        }
     }
 }
 
@@ -98,5 +110,9 @@ function comparador() {
 	return Math.random() - 0.5;
 }
 
-const quantidade = selecionaQuantidade();
-iniciarJogo();
+function inicio() {
+    const quantidade = selecionaQuantidade();
+    iniciarJogo(quantidade);
+}
+
+inicio();

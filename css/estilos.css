@@ -79,6 +79,10 @@ img {
     font-size: 12px;
 }
 
+li:hover {
+    cursor: pointer;
+}
+
 @media (max-width: 414px) {
     .container {
         width: 100%;
@@ -94,6 +98,25 @@ img {
         width: 117px;
         flex-wrap: nowrap;
         flex-direction: column;
+    }
+    
+    li {
+        margin-bottom: 34px;
+        justify-self: center;
+    }
+}
+
+@media (min-width: 414px) and (max-width: 872px) {
+    .container {
+        width: 100%;
+    }
+    
+    .topo {
+        width: 100%;
+    }
+    
+    ul {
+        width: 100%;
     }
     
     li {
