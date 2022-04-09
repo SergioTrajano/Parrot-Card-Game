@@ -20,7 +20,7 @@ body {
     font-size: 56px;
     font-weight: bold;
     line-height: 66px;
-    padding: 0 auto;
+    padding: auto;
     background-color: aqua;
     margin: 40px;
     text-align: center;
@@ -28,34 +28,51 @@ body {
     color: #75B79E;
 }
 
-.jogo {
-    width: 872px;
+ul {
+    width: 940px;
     display: flex;
-    flex-direction: column;
-    align-items: center;
+    justify-content: center;
+    flex-wrap: wrap;
     background-color: #EEF9BF;
+    
 }
 
-.carta {
+li {
     width: 117px;
     height: 146px;
     background-color: #A7E9AF;
     border: 1px solid #99CEA8;
     border-radius: 5px;
+    margin: 0 34px 34px 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    list-style: none;
+    position: relative;
 }
 
-.fileira-grande {
-    width: 100%;
-    display: flex;
-    justify-content: space-between;
-    margin-top: 34px;
+li div {
+    position: absolute;
+    backface-visibility: hidden;
+    transform-style: preserve-3d;
+    transition: all .5s;
 }
 
-.fileira-pequena {
-    width: 268px;
-    display: flex;
-    justify-content: space-between;
-    margin-top: 34px;
+img {
+    width: 100px;
+    height: 100px;
+}
+
+.atras {
+    transform: rotateY(180deg); 
+}
+
+.selecionadoFrente {
+    transform: rotateY(-180deg);
+}
+
+.selecionadoAtras {
+    transform: rotateY(0deg);
 }
 
 @media (max-width: 414px) {
@@ -65,24 +82,18 @@ body {
     
     .topo {
         width: 100%;
+        font-size: 36px;
+        line-height: 42px;
     }
     
-    .jogo {
+    ul {
         width: 117px;
+        flex-wrap: nowrap;
+        flex-direction: column;
     }
     
-    .carta {
+    li {
         margin-bottom: 34px;
-    }
-
-    .fileira-grande {
-        flex-direction: column;
-        margin-top: 0;
-    }
-
-    .fileira-pequena {
-        flex-direction: column;
-        align-items: center;
-        margin-top: 0;
+        justify-self: center;
     }
 }
