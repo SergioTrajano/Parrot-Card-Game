@@ -75,6 +75,10 @@ img {
     transform: rotateY(0deg);
 }
 
+.clickado {
+    font-size: 12px;
+}
+
 @media (max-width: 414px) {
     .container {
         width: 100%;
