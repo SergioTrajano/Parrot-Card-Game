@@ -1,13 +1,3 @@
-let cartas = [
-    "gifs/bobrossparrot.gif",
-    "gifs/explodyparrot.gif",
-    "gifs/fiestaparrot.gif",
-    "gifs/metalparrot.gif",
-    "gifs/revertitparrot.gif",
-    "gifs/tripletsparrot.gif",
-    "gifs/unicornparrot.gif"
-]
-
 let quantClick = 0;
 let idTime;
 
@@ -20,6 +10,16 @@ function selecionaQuantidade() {
 }
 
 function iniciarJogo(quantidade) {
+    const cartas = [
+        "gifs/bobrossparrot.gif",
+        "gifs/explodyparrot.gif",
+        "gifs/fiestaparrot.gif",
+        "gifs/metalparrot.gif",
+        "gifs/revertitparrot.gif",
+        "gifs/tripletsparrot.gif",
+        "gifs/unicornparrot.gif"
+    ]
+    cartas.sort(comparador);
     let list = [];
     for (let j = 0; j < quantidade/2; j++) {
         list[2*j] = cartas[j];
