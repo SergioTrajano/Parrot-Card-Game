@@ -1,14 +1,15 @@
 let cartas = [
-    {gif: "gifs/bobrossparrot.gif"},
-    {gif: "gifs/explodyparrot.gif"},
-    {gif: "gifs/fiestaparrot.gif"},
-    {gif: "gifs/metalparrot.gif"},
-    {gif: "gifs/revertitparrot.gif"},
-    {gif: "gifs/tripletsparrot.gif"},
-    {gif: "gifs/unicornparrot.gif"},
+    "gifs/bobrossparrot.gif",
+    "gifs/explodyparrot.gif",
+    "gifs/fiestaparrot.gif",
+    "gifs/metalparrot.gif",
+    "gifs/revertitparrot.gif",
+    "gifs/tripletsparrot.gif",
+    "gifs/unicornparrot.gif"
 ]
 
 let quantClick = 0;
+let idTime;
 
 function selecionaQuantidade() {
     let quantidade;
@@ -39,7 +40,7 @@ function iniciarJogo(quantidade) {
         lista.innerHTML += `
         <li onclick="virarCarta(this)">
             <div class="frente"> <img src="front.png"></div>
-            <div class="atras"> <img src="${list[i].gif}"></div>
+            <div class="atras"> <img src="${list[i]}"></div>
         </li>`;
     }
 }
@@ -93,8 +94,10 @@ function atualizaCartas() {
 }
 
 function fim(numVirados, quantidade) {
+    let time = document.querySelector(".time div:first-child").innerHTML;
     if (numVirados == quantidade) {
-        alert(`Você ganhou em ${quantClick} jogadas!`);
+        clearInterval(idTime);
+        alert(`Você ganhou com ${quantClick} jogadas em ${time} segundos!`);
         let continuar = prompt("Deseja continuar? (sim/não)");
         while (continuar !== "sim" && continuar !== "não") {
             continuar = prompt("Resposta invalida... Deseja continuar? (sim/não) ");
@@ -110,8 +113,14 @@ function comparador() {
 	return Math.random() - 0.5;
 }
 
+function aumentarTempo(time) {
+    time.innerHTML = Number(time.innerHTML) + 1;
+}
+
 function inicio() {
     const quantidade = selecionaQuantidade();
+    document.querySelector(".time div:first-child").innerHTML = 0;
+    idTime = setInterval(aumentarTempo, 1000, document.querySelector(".time div:first-child"));
     iniciarJogo(quantidade);
 }
 
