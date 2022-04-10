@@ -19,14 +19,6 @@ function selecionaQuantidade() {
     return quantidade;
 }
 
-function continuarJogando() {
-    let continuar = prompt("Deseja continuar? (sim/não)");
-    while (continuar !== "sim" && continuar !== "não") {
-        continuar = prompt("Resposta invalida... Deseja continuar? (sim/não) ");
-    }
-    return continuar;
-}
-
 function iniciarJogo(quantidade) {
     let list = [];
     for (let j = 0; j < quantidade/2; j++) {
