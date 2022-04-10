@@ -15,7 +15,7 @@ function selecionaQuantidade() {
     let quantidade;
     do {
         quantidade = prompt("Com quantas cartas queres jogar? (entre 2 e 14) ");
-    } while (quantidade < 2 || quantidade > 14 || quantidade % 2 !== 0);
+    } while (quantidade < 4 || quantidade > 14 || quantidade % 2 !== 0);
     return quantidade;
 }
 
